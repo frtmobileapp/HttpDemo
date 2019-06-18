@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.nd.frt.fragmentdemo.R;
 import com.nd.frt.fragmentdemo.fragment.DetailFragment;
-import com.nd.frt.fragmentdemo.model.UserInfo;
+import com.nd.frt.fragmentdemo.model.UserInfosResponse;
 import com.nd.frt.fragmentdemo.viewholder.UserViewHolder;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     public static final String TAG = UserAdapter.class.getSimpleName();
 
-    private List<UserInfo> mUserInfos;
+    private List<UserInfosResponse.UserInfoResponse> mUserInfos;
 
-    public UserAdapter(List<UserInfo> userInfos) {
+    public UserAdapter(List<UserInfosResponse.UserInfoResponse> userInfos) {
         mUserInfos = userInfos;
     }
 
@@ -41,10 +41,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, @SuppressLint("RecyclerView") final int position) {
         Log.d(TAG, "onBindViewHolder");
-        final UserInfo userInfo = mUserInfos.get(position);
-        Glide.with(userViewHolder.mIvAvatar).load(userInfo.avatarUrl).into(userViewHolder.mIvAvatar);
-        userViewHolder.mTvUserName.setText(userInfo.userName);
-        userViewHolder.mTvEmail.setText(userInfo.content);
+        final UserInfosResponse.UserInfoResponse userInfo = mUserInfos.get(position);
+        Glide.with(userViewHolder.mIvAvatar).load(userInfo.picture.medium).into(userViewHolder.mIvAvatar);
+        userViewHolder.mTvUserName.setText(userInfo.name.getName());
+        userViewHolder.mTvEmail.setText(userInfo.email);
         userViewHolder.mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +68,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return mUserInfos.size();
     }
 
-    public void edit(UserInfo userInfo, int index) {
+    public void edit(UserInfosResponse.UserInfoResponse userInfo, int index) {
         mUserInfos.set(index, userInfo);
         notifyDataSetChanged();
     }

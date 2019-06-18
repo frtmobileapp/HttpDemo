@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.nd.frt.fragmentdemo.R;
-import com.nd.frt.fragmentdemo.model.UserInfo;
+import com.nd.frt.fragmentdemo.model.UserInfosResponse;
 
 public class DetailFragment extends Fragment {
 
     public static final String PARAM_USER_INFO = "user_info";
     public static final String PARAM_USER_INDEX = "user_index";
 
-    public static DetailFragment newInstance(UserInfo userInfo, int index) {
+    public static DetailFragment newInstance(UserInfosResponse.UserInfoResponse userInfo, int index) {
         Bundle args = new Bundle();
         DetailFragment fragment = new DetailFragment();
         args.putSerializable(PARAM_USER_INFO, userInfo);
@@ -27,7 +27,7 @@ public class DetailFragment extends Fragment {
         return fragment;
     }
 
-    private UserInfo mUserInfo;
+    private UserInfosResponse.UserInfoResponse mUserInfo;
     private int mIndex;
     private OnEditUserInfo mEditUserInfo;
 
@@ -43,11 +43,11 @@ public class DetailFragment extends Fragment {
         View view = getView();
         assert view != null;
         final EditText etUserName = view.findViewById(R.id.etUsername);
-        etUserName.setHint(mUserInfo.userName);
+        etUserName.setHint(mUserInfo.name.getName());
         view.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUserInfo.userName = etUserName.getText().toString();
+                mUserInfo.email = etUserName.getText().toString();
                 mEditUserInfo.onSuccess(mUserInfo, mIndex);
             }
         });
@@ -57,7 +57,7 @@ public class DetailFragment extends Fragment {
     public void setArguments(@Nullable Bundle args) {
         super.setArguments(args);
         assert args != null;
-        mUserInfo = (UserInfo) args.getSerializable(PARAM_USER_INFO);
+        mUserInfo = (UserInfosResponse.UserInfoResponse) args.getSerializable(PARAM_USER_INFO);
         mIndex = args.getInt(PARAM_USER_INDEX);
     }
 
@@ -70,6 +70,6 @@ public class DetailFragment extends Fragment {
     }
 
     public interface OnEditUserInfo {
-        void onSuccess(UserInfo userInfo, int index);
+        void onSuccess(UserInfosResponse.UserInfoResponse userInfo, int index);
     }
 }
