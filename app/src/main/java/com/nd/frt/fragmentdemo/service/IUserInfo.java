@@ -2,12 +2,12 @@ package com.nd.frt.fragmentdemo.service;
 
 import android.content.Context;
 
-import com.nd.frt.fragmentdemo.model.UserInfo;
+import com.nd.frt.fragmentdemo.model.UserInfosResponse;
 
 import java.util.List;
 
 public interface IUserInfo {
 
-    List<UserInfo> getUserInfos(Context context);
+    List<UserInfosResponse.UserInfoResponse> getUserInfos(Context context);
 
 }
