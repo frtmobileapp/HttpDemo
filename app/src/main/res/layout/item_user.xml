@@ -20,7 +20,7 @@
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@id/ivAvatar"
         android:layout_toRightOf="@id/ivAvatar"
-        android:text="@string/z"
+            android:text="@string/z"
         android:textSize="16sp" />
 
     <TextView
